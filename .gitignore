@@ -1,4 +1,10 @@
 ﻿/Restaurant.API/appsettings.Development.json
 /Restaurant.API/bin
 /Restaurant.API/obj
+/Restaurant.Application/bin
+/Restaurant.Application/obj
+/Restaurant.Domain/bin
+/Restaurant.Domain/obj
+/Restaurant.Infrastructure/bin
+/Restaurant.Infrastructure/obj
 /.idea
