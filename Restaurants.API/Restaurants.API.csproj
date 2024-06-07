@@ -3,10 +3,11 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>    
+    <RootNamespace>Restaurants.API</RootNamespace>    
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Restaurant.Application\Restaurant.Application.csproj" />
+    <ProjectReference Include="..\Restaurants.Application\Restaurants.Application.csproj" />
   </ItemGroup>
 
 </Project>
