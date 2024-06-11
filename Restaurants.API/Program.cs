@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
+using Restaurants.Application.Extensions;
 using Restaurants.Infrastructure.Extensions;
 using Restaurants.Infrastructure.Seeders;
 
@@ -9,6 +10,7 @@ WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 
+builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
 WebApplication app = builder.Build();
