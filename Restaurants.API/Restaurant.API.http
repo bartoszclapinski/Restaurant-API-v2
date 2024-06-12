@@ -1,5 +1,13 @@
 @host = https://localhost
 @port = 7000
 @Restaurant.API_HostAddress = {{host}}:{{port}}
+@KFC.Guid = 8dd54ded-435b-4d74-6af7-08dc895affe2
 
+### Get All Restaurants
 GET {{Restaurant.API_HostAddress}}/api/restaurant
+
+### Get Restaurant By Id
+GET {{Restaurant.API_HostAddress}}/api/restaurant/{{KFC.Guid}}
+
+### Get Restaurant By Id - Negative Test
+GET {{Restaurant.API_HostAddress}}/api/restaurant/1
