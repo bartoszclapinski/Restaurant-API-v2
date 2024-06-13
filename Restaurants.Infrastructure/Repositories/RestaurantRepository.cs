@@ -15,7 +15,9 @@ public class RestaurantRepository(RestaurantDbContext context) : IRestaurantRepo
 
 	public async Task<Restaurant?> GetByIdAsync(Guid id)
 	{
-		Restaurant? restaurant = await context.Restaurants.FindAsync(id);
+		Restaurant? restaurant = await context.Restaurants
+			.Include(r => r.Dishes)
+			.FirstOrDefaultAsync(r => r.RestaurantId == id);
 		return restaurant;
 	}
 }
