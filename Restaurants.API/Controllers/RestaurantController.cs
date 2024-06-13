@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Restaurants;
+using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Entities;
 
 namespace Restaurants.API.Controllers;
@@ -20,7 +21,7 @@ public class RestaurantController(IRestaurantsService restaurantsService) : Cont
 	[HttpGet("{id}")]
 	public async Task<IActionResult> GetById(string id)
 	{
-		Restaurant? restaurant = await restaurantsService.GetRestaurantByIdAsync(id);
+		RestaurantDto? restaurant = await restaurantsService.GetRestaurantByIdAsync(id);
 		
 		if (restaurant is null) return NotFound();
 		return Ok(restaurant);
