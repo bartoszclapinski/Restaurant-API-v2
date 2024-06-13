@@ -4,10 +4,26 @@
 @KFC.Guid = 8dd54ded-435b-4d74-6af7-08dc895affe2
 
 ### Get All Restaurants
-GET {{Restaurant.API_HostAddress}}/api/restaurant
+GET {{Restaurant.API_HostAddress}}/api/restaurants
 
 ### Get Restaurant By Id
-GET {{Restaurant.API_HostAddress}}/api/restaurant/{{KFC.Guid}}
+GET {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}
 
 ### Get Restaurant By Id - Negative Test
-GET {{Restaurant.API_HostAddress}}/api/restaurant/1
+GET {{Restaurant.API_HostAddress}}/api/restaurants/1
+
+### Create Restaurant
+POST {{Restaurant.API_HostAddress}}/api/restaurants
+Content-Type: application/json
+
+{
+"Name": "Spicy Delights",
+"Description": "A culinary experience like no other",
+"Category": "Fine Dining",
+"HasDelivery": true,
+"ContactEmail": "info@gourmetdelights.com",
+"ContactNumber": "555-123-4567",
+"City": "Metropolis",
+"Street": "456 Gourmet Avenue",
+"PostalCode": "54321"
+}

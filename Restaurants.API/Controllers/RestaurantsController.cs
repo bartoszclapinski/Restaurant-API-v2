@@ -9,7 +9,7 @@ namespace Restaurants.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class RestaurantController(IRestaurantsService restaurantsService) : ControllerBase
+public class RestaurantsController(IRestaurantsService restaurantsService) : ControllerBase
 {
 	
 	[HttpGet]
@@ -25,5 +25,13 @@ public class RestaurantController(IRestaurantsService restaurantsService) : Cont
 		
 		if (restaurant is null) return NotFound();
 		return Ok(restaurant);
+	}
+
+	[HttpPost]
+	public async Task<IActionResult> CreateRestaurant([FromBody] CreateRestaurantDto createRestaurantDto)
+	{
+		Guid restaurantId = await restaurantsService.CreateRestaurantAsync(createRestaurantDto);
+
+		return CreatedAtAction(nameof(GetById), new { id = restaurantId }, null);
 	}
 }

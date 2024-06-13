@@ -28,7 +28,14 @@ internal class RestaurantsService(
 
 		return mapper.Map<RestaurantDto>(restaurant);
 	}
-	
+
+	public async Task<Guid> CreateRestaurantAsync(CreateRestaurantDto createRestaurantDto)
+	{
+		logger.LogInformation("Creating restaurant");
+		var restaurant = mapper.Map<Restaurant>(createRestaurantDto);
+		return await restaurantRepository.CreateAsync(restaurant);
+	}
+
 	private Guid? IsGuidValid(string id)
 	{
 		if (!Guid.TryParse(id, out Guid guidId))
