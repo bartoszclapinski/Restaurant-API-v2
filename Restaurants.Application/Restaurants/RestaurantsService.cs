@@ -1,17 +1,22 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using AutoMapper;
+using Microsoft.Extensions.Logging;
 using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Domain.Entities;
 using Restaurants.Domain.Repositories;
 
 namespace Restaurants.Application.Restaurants;
 
-internal class RestaurantsService(IRestaurantRepository restaurantRepository, ILogger<RestaurantsService> logger) : IRestaurantsService
+internal class RestaurantsService(
+	IRestaurantRepository restaurantRepository, 
+	ILogger<RestaurantsService> logger,
+	IMapper mapper) : IRestaurantsService
 {
 	public async Task<IEnumerable<RestaurantDto>> GetAllRestaurantsAsync()
 	{
 		logger.LogInformation("Getting all restaurants");
 		var restaurants = await restaurantRepository.GetAllAsync();
-		return restaurants.Select(RestaurantDto.FromEntity);
+		
+		return mapper.Map<IEnumerable<RestaurantDto>>(restaurants);
 	}
 
 	public async Task<RestaurantDto?> GetRestaurantByIdAsync(string id)
@@ -20,7 +25,8 @@ internal class RestaurantsService(IRestaurantRepository restaurantRepository, IL
 		var guidId = IsGuidValid(id);
 		if (guidId is null) return null;
 		Restaurant? restaurant = await restaurantRepository.GetByIdAsync(guidId.Value);
-		return RestaurantDto.FromEntity(restaurant!);
+
+		return mapper.Map<RestaurantDto>(restaurant);
 	}
 	
 	private Guid? IsGuidValid(string id)
