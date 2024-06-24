@@ -30,3 +30,13 @@ Content-Type: application/json
 
 ### Delete Restaurant
 DELETE {{Restaurant.API_HostAddress}}/api/restaurants/12aaa840-2cf0-4a8e-0a0e-08dc8bdddb47
+
+### Update Restaurant
+PATCH {{Restaurant.API_HostAddress}}/api/restaurants/f01a2f11-e5ce-4a0d-c94f-08dc8bdd2a36
+Content-Type: application/json
+
+{
+"Name": "Spicy Delights updated",
+"Description": "A culinary experience like no other updated",
+"HasDelivery": false
+}
