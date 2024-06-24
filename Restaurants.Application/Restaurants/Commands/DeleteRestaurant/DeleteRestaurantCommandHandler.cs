@@ -13,7 +13,7 @@ public class DeleteRestaurantCommandHandler(
 
 	public async Task<bool> Handle(DeleteRestaurantCommand request, CancellationToken cancellationToken)
 	{
-		logger.LogInformation("Deleting restaurant by id {Id}", request.RestaurantId);
+		logger.LogInformation("Deleting restaurant by id {RestaurantId}", request.RestaurantId);
 		Restaurant? restaurant = await restaurantRepository.GetByIdAsync(request.RestaurantId);
 		if (restaurant is null) return false;
 		await restaurantRepository.DeleteAsync(restaurant);
