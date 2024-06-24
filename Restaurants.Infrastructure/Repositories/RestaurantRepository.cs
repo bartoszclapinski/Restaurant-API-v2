@@ -33,5 +33,7 @@ public class RestaurantRepository(RestaurantDbContext context) : IRestaurantRepo
 		context.Remove(restaurant);
 		await context.SaveChangesAsync();
 	}
-	
+
+	public Task SaveChangesAsync() => context.SaveChangesAsync();
+
 }
