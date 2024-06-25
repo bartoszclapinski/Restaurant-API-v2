@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Restaurants.Commands.CreateRestaurant;
 using Restaurants.Application.Restaurants.Commands.DeleteRestaurant;
@@ -17,13 +19,14 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 {
 	
 	[HttpGet]
-	public async Task<IActionResult> GetAll()
+	//[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<RestaurantDto>))]
+	public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll()
 	{
 		return Ok(await mediator.Send(new GetAllRestaurantsQuery()));
 	}
 	
 	[HttpGet("{id}")]
-	public async Task<IActionResult> GetById(string id)
+	public async Task<ActionResult<RestaurantDto?>> GetById(string id)
 	{
 		if (!Guid.TryParse(id, out Guid restaurantId)) return BadRequest();
 		RestaurantDto? restaurant = await mediator.Send(new GetRestaurantByIdQuery(restaurantId));
@@ -39,6 +42,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 	}
 	
 	[HttpDelete("{id}")]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> DeleteRestaurant(string id)
 	{
 		if (!Guid.TryParse(id, out Guid restaurantId)) return BadRequest();
@@ -48,6 +53,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 	}
 
 	[HttpPatch("{id}")]
+	[ProducesResponseType(StatusCodes.Status204NoContent)]
+	[ProducesResponseType(StatusCodes.Status404NotFound)]
 	public async Task<IActionResult> UpdateRestaurant(string id, UpdateRestaurantCommand command)
 	{
 		if (!Guid.TryParse(id, out Guid guidId)) return BadRequest();
