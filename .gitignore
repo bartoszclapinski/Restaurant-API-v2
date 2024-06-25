@@ -1,6 +1,7 @@
 ﻿/Restaurants.API/appsettings.Development.json
 /Restaurants.API/bin
 /Restaurants.API/obj
+/Restaurants.API/Logs
 /Restaurants.Application/bin
 /Restaurants.Application/obj
 /Restaurants.Domain/bin
