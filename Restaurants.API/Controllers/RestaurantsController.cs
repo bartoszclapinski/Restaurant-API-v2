@@ -26,11 +26,11 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 	}
 	
 	[HttpGet("{id}")]
-	public async Task<ActionResult<RestaurantDto?>> GetById(string id)
+	public async Task<ActionResult<RestaurantDto>> GetById(string id)
 	{
 		if (!Guid.TryParse(id, out Guid restaurantId)) return BadRequest();
-		RestaurantDto? restaurant = await mediator.Send(new GetRestaurantByIdQuery(restaurantId));
-		if (restaurant is null) return NotFound();
+		RestaurantDto restaurant = await mediator.Send(new GetRestaurantByIdQuery(restaurantId));
+		
 		return Ok(restaurant);
 	}
 
@@ -47,8 +47,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 	public async Task<IActionResult> DeleteRestaurant(string id)
 	{
 		if (!Guid.TryParse(id, out Guid restaurantId)) return BadRequest();
-		var deleted = await mediator.Send(new DeleteRestaurantCommand(restaurantId));
-		if (!deleted) return NotFound();
+		await mediator.Send(new DeleteRestaurantCommand(restaurantId));
+		
 		return NoContent();
 	}
 
@@ -59,8 +59,8 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 	{
 		if (!Guid.TryParse(id, out Guid guidId)) return BadRequest();
 		command.RestaurantId = guidId;
-		var isUpdated = await mediator.Send(command);
-		if (!isUpdated) return NotFound();
+		await mediator.Send(command);
+		
 		return NoContent();
 	}
 }
