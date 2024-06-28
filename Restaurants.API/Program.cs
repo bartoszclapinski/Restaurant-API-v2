@@ -23,7 +23,6 @@ builder.Services.AddInfrastructure(builder.Configuration);
 builder.Host.UseSerilog((context, configuration) =>
 	configuration.ReadFrom.Configuration(context.Configuration));
 		
-
 WebApplication app = builder.Build();
 
 IServiceScope scope = app.Services.CreateScope();
