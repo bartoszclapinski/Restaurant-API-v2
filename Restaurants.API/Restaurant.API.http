@@ -40,3 +40,14 @@ Content-Type: application/json
 "Description": "A culinary experience like no other updated",
 "HasDelivery": false
 }
+
+### Create new dish
+POST {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}/dishes
+Content-Type: application/json
+
+{
+  "Name": "Chicken Wings",
+  "Description": "Finger-licking good", 
+  "Price": 12.99,
+  "KiloCalories": 500
+}
