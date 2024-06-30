@@ -20,8 +20,8 @@ public class DishesController(IMediator mediator) : ControllerBase
 	{
 		if (!Guid.TryParse(restaurantId, out Guid id)) return BadRequest();
 		command.RestaurantId = id;
-		await mediator.Send(command);
-		return Created();
+		Guid dishId = await mediator.Send(command);
+		return CreatedAtAction(nameof(GetDishForRestaurant), new { restaurantId = id, dishId }, null);;
 	}
 	
 	[HttpGet]
