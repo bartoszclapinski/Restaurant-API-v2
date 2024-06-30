@@ -51,3 +51,6 @@ Content-Type: application/json
   "Price": 12.99,
   "KiloCalories": 500
 }
+
+### Delete dish by id for a restaurant
+DELETE {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}/dishes/65bc00f1-69b8-433c-ad56-08dc977bf71c

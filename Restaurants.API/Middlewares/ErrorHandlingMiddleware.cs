@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -20,7 +19,7 @@ public class ErrorHandlingMiddleware(ILogger<ErrorHandlingMiddleware> logger) : 
 		{
 			context.Response.StatusCode = StatusCodes.Status404NotFound;
 			await context.Response.WriteAsync(notFoundException.Message);
-			logger.LogWarning(notFoundException.Message);
+			logger.LogWarning("Not found: " + notFoundException.Message);
 		}
 		catch (Exception e)
 		{
