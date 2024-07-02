@@ -54,3 +54,12 @@ Content-Type: application/json
 
 ### Delete dish by id for a restaurant
 DELETE {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}/dishes/65bc00f1-69b8-433c-ad56-08dc977bf71c
+
+### Register User
+POST {{Restaurant.API_HostAddress}}/register
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "password"
+}
