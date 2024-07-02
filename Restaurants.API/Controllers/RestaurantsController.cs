@@ -31,6 +31,7 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 	[HttpGet("{id}")]
 	public async Task<ActionResult<RestaurantDto>> GetById(string id)
 	{
+		
 		if (!Guid.TryParse(id, out Guid restaurantId)) return BadRequest();
 		RestaurantDto restaurant = await mediator.Send(new GetRestaurantByIdQuery(restaurantId));
 		
