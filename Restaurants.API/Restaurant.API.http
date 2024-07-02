@@ -2,9 +2,12 @@
 @port = 7000
 @Restaurant.API_HostAddress = {{host}}:{{port}}
 @KFC.Guid = 8dd54ded-435b-4d74-6af7-08dc895affe2
+@testUser.Token = CfDJ8KppXvv35Z1MvC9Y7rPN44bs4Stf4gywZu-7jWkpQF1CQU68TsnQjM32jWJbBFAicq0d6aqvXzqpyTePwFwQhN9WYQG4oScMvA-WavE9Cxxg8Qt034nBxYg6UpQpONGpTtD3ug8AFlm89Vu1ulaEy738hSYr6v6M-KpSq2HMZJDHRH8EEdgGcxbfmUbbcxo6tU81ALLPcpT1Dykq1ggbHj88sZUw1wEJipNsBwhUqBiU3PUvTjKPCybvZ_mgW1tgFQAjGGBVn71EbF6tII4FmzAxpikENkJ0inoqQH50FQX1dLMaohvWFe4JaCGTWI-K7RjlF75ctbANd0QfUTxVtDws-f7YXNA-9K6ThKgG6QgcekGkb1ae5enZBcNWcKNd3lOp8RQtUJfMCXBK_LugbrnpfFGuktbB0_jDJeI78g4DWwwUSmvtGGfvON4wvoJJU4bDtOOKwuUL64IB3jaPFQkQPlnNObfmE_hhGemPT_hpj6-juiBJEK7_QthnseL4KiYitkS4mVjeiJ2bEp5Q9A2dGuiGCF2v3qRoOhjfC48a7H6U0q64Ld0Vo3wv3LKkbMG75eq02TZ2LIk6vShT-W2AcbHg58lOUk-Wdb4jX83wIr8-y9L2biqFEjmmZprwSKrGrzTow-ArW3IKjqCDkwJDkHO9RZTdU1L1z_t0TKbeFQFJItsln5lM8cg5vbgX6g
+
 
 ### Get All Restaurants
 GET {{Restaurant.API_HostAddress}}/api/restaurants
+Authorization: Bearer {{testUser.Token}}
 
 ### Get Restaurant By Id
 GET {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}
@@ -56,10 +59,19 @@ Content-Type: application/json
 DELETE {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}/dishes/65bc00f1-69b8-433c-ad56-08dc977bf71c
 
 ### Register User
-POST {{Restaurant.API_HostAddress}}/register
+POST {{Restaurant.API_HostAddress}}/api/identity/register
 Content-Type: application/json
 
 {
   "email": "test@test.com",
-  "password": "password"
+  "password": "Password1!"
+}
+
+### Login User
+POST {{Restaurant.API_HostAddress}}/api/identity/login
+Content-Type: application/json
+
+{
+  "email": "test@test.com",
+  "password": "Password1!"
 }
