@@ -75,3 +75,30 @@ Content-Type: application/json
   "email": "test@test.com",
   "password": "Password1!"
 }
+
+### Register User for role Admin
+POST {{Restaurant.API_HostAddress}}/api/identity/register
+Content-Type: application/json
+
+{
+  "email": "admin@test.com",
+  "password": "Password1!"
+}
+
+### Register User for role Owner
+POST {{Restaurant.API_HostAddress}}/api/identity/register
+Content-Type: application/json
+
+{
+  "email": "owner@test.com",
+  "password": "Password1!"
+}
+
+### Register User for role User
+POST {{Restaurant.API_HostAddress}}/api/identity/register
+Content-Type: application/json
+
+{
+  "email": "user@test.com",
+  "password": "Password1!"
+}
