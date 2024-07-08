@@ -86,9 +86,9 @@ internal class RestaurantSeeder(RestaurantDbContext context) : IRestaurantSeeder
 	{
 		List<IdentityRole> roles =
 		[
-			new IdentityRole(UserRoles.User),
-			new IdentityRole(UserRoles.Owner),
-			new IdentityRole(UserRoles.Admin)
+			new IdentityRole(UserRoles.User) {NormalizedName = UserRoles.User.ToUpper()},
+			new IdentityRole(UserRoles.Owner) {NormalizedName = UserRoles.User.ToUpper()},
+			new IdentityRole(UserRoles.Admin) {NormalizedName = UserRoles.User.ToUpper()}
 		];
 
 		return roles;
