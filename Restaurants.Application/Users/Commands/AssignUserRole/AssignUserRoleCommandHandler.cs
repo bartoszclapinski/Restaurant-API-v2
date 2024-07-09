@@ -22,6 +22,5 @@ public class AssignUserRoleCommandHandler(
 		                    ?? throw new NotFoundException(nameof(IdentityRole), request.RoleName);
 		
 		await userManager.AddToRoleAsync(user, role.Name!);
-		
 	}
 }

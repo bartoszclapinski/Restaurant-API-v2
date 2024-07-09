@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Users.Commands;
 using Restaurants.Application.Users.Commands.AssignUserRole;
+using Restaurants.Application.Users.Commands.UnassignUserRole;
 
 namespace Restaurants.API.Controllers;
 
@@ -26,5 +27,12 @@ public class IdentityController(IMediator mediator) : ControllerBase
 		await mediator.Send(command);
 		return NoContent();
 	}
-	
+
+	[HttpDelete("userRole")]
+	public async Task<IActionResult> UnassignUserRole(UnassignUserRoleCommand command)
+	{
+		await mediator.Send(command);
+		return NoContent();
+	}
+
 }
