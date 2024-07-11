@@ -26,5 +26,7 @@ public static class ServiceCollectionExtensions
 		services.AddScoped<IRestaurantSeeder, RestaurantSeeder>();
 		services.AddScoped<IRestaurantRepository, RestaurantRepository>();
 		services.AddScoped<IDishRepository, DishRepository>();
+		services.AddAuthorizationBuilder()
+			.AddPolicy(PolicyNames.HasNationality, p => p.RequireClaim(AppClaimTypes.Nationality, "Polish"));
 	}
 }
