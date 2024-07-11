@@ -15,8 +15,8 @@ public class RestaurantsUserClaimsPrincipalFactory(
 	{
 		ClaimsIdentity id = await GenerateClaimsAsync(user);
 
-		if (user.Nationality != null) id.AddClaim(new Claim("Nationality", user.Nationality));
-		if (user.DateOfBirth != null) id.AddClaim(new Claim("DateOfBirth", user.DateOfBirth.ToString("yyyy-MM--dd")));
+		if (user.Nationality != null) id.AddClaim(new Claim(AppClaimTypes.Nationality, user.Nationality));
+		if (user.DateOfBirth != null) id.AddClaim(new Claim(AppClaimTypes.DateOfBirth, user.DateOfBirth.ToString("yyyy-MM--dd")));
 
 		return new ClaimsPrincipal(id);
 	}
