@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Restaurants.Application.Dishes.Commands.CreateDish;
 using Restaurants.Application.Dishes.Commands.DeleteDish;
 using Restaurants.Application.Dishes.Dtos;
 using Restaurants.Application.Dishes.Queries.GetDishByIdForRestaurant;
 using Restaurants.Application.Dishes.Queries.GetDishesForRestaurant;
+using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.API.Controllers;
 
 [ApiController]
 [Route("api/restaurants/{restaurantId}/dishes")]
+[Authorize]
 public class DishesController(IMediator mediator) : ControllerBase
 {
 	[HttpPost]
@@ -21,10 +24,11 @@ public class DishesController(IMediator mediator) : ControllerBase
 		if (!Guid.TryParse(restaurantId, out Guid id)) return BadRequest();
 		command.RestaurantId = id;
 		Guid dishId = await mediator.Send(command);
-		return CreatedAtAction(nameof(GetDishForRestaurant), new { restaurantId = id, dishId }, null);;
+		return CreatedAtAction(nameof(GetDishForRestaurant), new { restaurantId = id, dishId }, null);
 	}
 	
 	[HttpGet]
+	[Authorize(Policy = PolicyNames.AtLeast20)]
 	public async Task<ActionResult<IEnumerable<DishDto>>> GetAllDishesForRestaurant([FromRoute] string restaurantId)
 	{
 		if (!Guid.TryParse(restaurantId, out Guid id)) return BadRequest();
