@@ -32,9 +32,11 @@ public static class ServiceCollectionExtensions
 		services.AddScoped<IDishRepository, DishRepository>();
 		services.AddAuthorizationBuilder()
 			.AddPolicy(PolicyNames.HasNationality, p => p.RequireClaim(AppClaimTypes.Nationality, "Polish"))
-			.AddPolicy(PolicyNames.AtLeast20, p => p.AddRequirements(new MinimumAgeRequirement(20)));
+			.AddPolicy(PolicyNames.AtLeast20, p => p.AddRequirements(new MinimumAgeRequirement(20)))
+			.AddPolicy(PolicyNames.CreatedAtLeast2Restaurants, p => p.AddRequirements(new CreatedMultipleRestaurantsRequirement(2)));
 		
 		services.AddScoped<IAuthorizationHandler, MinimumAgeRequirementsHandler>();
+		services.AddScoped<IAuthorizationHandler, CreatedMultipleRestaurantsRequirementHandler>();
 		services.AddScoped<IRestaurantAuthorizationService, RestaurantAuthorizationService>();
 	}
 }
