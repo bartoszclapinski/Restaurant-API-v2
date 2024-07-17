@@ -7,7 +7,7 @@
 
 ### Get All Restaurants
 GET {{Restaurant.API_HostAddress}}/api/restaurants
-Authorization: Bearer {{testUser.Token}}
+//Authorization: Bearer {{testUser.Token}}
 
 ### Get Restaurant By Id
 GET {{Restaurant.API_HostAddress}}/api/restaurants/{{KFC.Guid}}
@@ -102,3 +102,6 @@ Content-Type: application/json
   "email": "user@test.com",
   "password": "Password1!"
 }
+
+### Get Matching Restaurants
+GET {{Restaurant.API_HostAddress}}/api/restaurants?searchPhrase=KFC
