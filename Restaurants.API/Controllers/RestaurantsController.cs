@@ -12,7 +12,6 @@ using Restaurants.Application.Restaurants.Dtos;
 using Restaurants.Application.Restaurants.Queries.GetAllRestaurants;
 using Restaurants.Application.Restaurants.Queries.GetRestaurantById;
 using Restaurants.Domain.Constants;
-using Restaurants.Domain.Entities;
 using Restaurants.Infrastructure.Authorization;
 
 namespace Restaurants.API.Controllers;
@@ -24,15 +23,17 @@ public class RestaurantsController(IMediator mediator) : ControllerBase
 {
 	
 	[HttpGet]
-	[Authorize(Policy = PolicyNames.CreatedAtLeast2Restaurants)]
+	[AllowAnonymous]
+	//[Authorize(Policy = PolicyNames.CreatedAtLeast2Restaurants)]
 	//[ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<RestaurantDto>))]
-	public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll()
+	public async Task<ActionResult<IEnumerable<RestaurantDto>>> GetAll([FromQuery]GetAllRestaurantsQuery query)
 	{
-		return Ok(await mediator.Send(new GetAllRestaurantsQuery()));
+		return Ok(await mediator.Send(query));
 	}
 	
 	[HttpGet("{id}")]
-	[Authorize(Policy = PolicyNames.HasNationality)]
+	[AllowAnonymous]
+	//[Authorize(Policy = PolicyNames.HasNationality)]
 	public async Task<ActionResult<RestaurantDto>> GetById(string id)
 	{
 		
